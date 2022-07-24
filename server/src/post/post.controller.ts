@@ -1,14 +1,15 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CreatePostDto } from './dto/createPostDto.dto';
 import { PostService } from './post.service';
+import { PostDocument } from './schema/post.schema';
 
-@Controller('post')
+@Controller('posts')
 export class PostController {
   constructor(private postService: PostService) {}
 
   @Get()
-  find(): string {
-    return 'Post test';
+  async getPosts(): Promise<PostDocument[]> {
+    return this.postService.getPosts();
   }
 
   @Post('create')

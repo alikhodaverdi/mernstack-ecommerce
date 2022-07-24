@@ -1,5 +1,4 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
 
 export type PostDocument = Post & Document;
 
@@ -20,12 +19,14 @@ export class Post {
   @Prop()
   selectedFile: string;
 
+  @Prop({ default: 0 })
+  likeCount: number;
+
+  @Prop({ default: 0 })
+  view: number;
+
   @Prop()
-  likeCount: {
-    type: Number;
-    defult: 0;
-  };
+  published: boolean;
 }
 
-export const PostMessage = SchemaFactory.createForClass(Post);
-export default PostMessage;
+export const PostSchema = SchemaFactory.createForClass(Post);
